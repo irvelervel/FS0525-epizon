@@ -5,6 +5,7 @@ import BookDetail from './BookDetail'
 
 const BookStore = () => {
   const [books, setBooks] = useState([])
+  // books ospita i libri recuperati dall'API, è un array di oggetti
   const [bookSelected, setBookSelected] = useState(null)
 
   useEffect(() => {
