@@ -1,14 +1,29 @@
 import { Col, Row, Button } from 'react-bootstrap'
 import { FaTrash } from 'react-icons/fa'
+import { useSelector, useDispatch } from 'react-redux'
 
-const Cart = ({ cart = [] }) => {
+const Cart = () => {
+  const cart = useSelector((currentState) => {
+    return currentState.cart.content
+  })
+
+  const dispatch = useDispatch()
+
   return (
     <Row>
       <Col sm={12}>
         <ul style={{ listStyle: 'none' }}>
           {cart.map((book, i) => (
             <li key={i} className="my-4">
-              <Button variant="danger" onClick={() => {}}>
+              <Button
+                variant="danger"
+                onClick={() => {
+                  dispatch({
+                    type: 'REMOVE_FROM_CART',
+                    payload: book.id, // info sul libro da eliminare
+                  })
+                }}
+              >
                 <FaTrash />
               </Button>
               <img

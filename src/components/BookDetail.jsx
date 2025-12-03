@@ -43,6 +43,10 @@ const BookDetail = ({ bookSelected }) => {
                 onClick={() => {
                   dispatch({
                     type: 'ADD_TO_CART',
+                    payload: bookSelected,
+                    // il payload non è obbligatorio ma in questo caso
+                    // serve perchè altrimenti il reducer non avrebbe idea
+                    // di quale libro aggiungere all'array cart.content
                   })
                 }}
               >

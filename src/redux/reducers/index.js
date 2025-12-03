@@ -33,6 +33,37 @@ const mainReducer = function (currentState = initialState, action) {
     case 'ADD_TO_CART':
       return {
         // dobbiamo ritornare il nuovo stato dell'app
+        ...currentState,
+        cart: {
+          ...currentState.cart,
+          content: [...currentState.cart.content, action.payload],
+          // action.type è il tipo, in questo caso 'ADD_TO_CART'
+          // action.payload è nel nostro caso il LIBRO da aggiungere!
+          // metodo alternativo
+          // content: currentState.cart.content.concat(action.payload)
+        },
+      }
+
+    case 'REMOVE_FROM_CART':
+      return {
+        ...currentState,
+        cart: {
+          ...currentState.cart,
+          content: currentState.cart.content.filter((book) => {
+            if (book.id === action.payload) {
+              return false
+            } else {
+              return true
+            }
+            // PRO VERSION
+            // return book.id !== action.payload
+          }),
+          //   ALTERNATIVA DA DEVIATI (funziona solo se action.payload è l'indice)
+          //   content: [
+          //     ...currentState.cart.content.slice(0, action.payload),
+          //     ...currentState.cart.content.slice(action.payload + 1),
+          //   ],
+        },
       }
 
     default:
