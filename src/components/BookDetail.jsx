@@ -1,7 +1,15 @@
 import { Col, Row, Button } from 'react-bootstrap'
 import { FaShoppingCart } from 'react-icons/fa'
+import { useDispatch } from 'react-redux'
 
 const BookDetail = ({ bookSelected }) => {
+  const dispatch = useDispatch()
+  // la funzione dispatch servirà per inviare una ACTION al reducer
+  // il reducer a quel punto si sveglierà automaticamente e grazie alla
+  // action appena ricevuta sarà in grado di generare il nuovo stato dell'app
+  // nel nostro caso, il nuovo stato dell'app avrà un elemento in più
+  // nell'array cart.content
+
   return (
     <div className="mt-3 mb-4 mb-lg-0">
       {bookSelected ? (
@@ -30,7 +38,14 @@ const BookDetail = ({ bookSelected }) => {
                 <span className="fw-bold">Price:</span>&nbsp;
                 {bookSelected.price}$
               </p>
-              <Button className="d-flex align-items-center" onClick={() => {}}>
+              <Button
+                className="d-flex align-items-center"
+                onClick={() => {
+                  dispatch({
+                    type: 'ADD_TO_CART',
+                  })
+                }}
+              >
                 <span className="me-2">AGGIUNGI AL</span>
                 <FaShoppingCart />
               </Button>
